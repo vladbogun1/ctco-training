@@ -3,7 +3,7 @@ import {Component, OnInit} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {NavHeaderComponent} from "./nav-header/nav-header.component";
 import {NavFooterComponent} from "./nav-footer/nav-footer.component";
-import {IconService} from "./services/icon-service/icon.service";
+import {IconService} from "./core/services/icon-service/icon.service";
 
 @Component({
   selector: 'app-root',
