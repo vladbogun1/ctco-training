@@ -1,0 +1,18 @@
+.ctco-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #d3daff;
+  color: black;
+
+  .logo-link {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo {
+    height: 48px;
+    width: auto;
+  }
+}
+

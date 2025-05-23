@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+
+/* Styles for neomorphism design */
+$neu-bg:            #d3daff;                  // base surface colour
+$neu-radius:        16px;
+$neu-shadow-dark:   rgba(0, 0, 0, 0.12);      // bottom-right
+$neu-shadow-light:  rgba(255, 255, 255, 0.8); // top-left
+
+@mixin neu-surface($inset: false) {
+  background: $neu-bg;
+  border-radius: $neu-radius;
+
+  @if $inset {
+    box-shadow:
+      inset 6px 6px 12px $neu-shadow-dark,
+      inset -6px -6px 12px $neu-shadow-light;
+  } @else {
+    box-shadow:
+      6px 6px 12px $neu-shadow-dark,
+      -6px -6px 12px $neu-shadow-light;
+  }
+}
