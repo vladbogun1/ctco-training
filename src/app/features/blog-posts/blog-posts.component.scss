@@ -1,0 +1,69 @@
+@use 'neu' as *;
+
+.blog-posts-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px;
+
+  h1 {
+    color: var(--text-primary);
+    margin-bottom: 32px;
+    font-size: 2.2rem;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    min-height: 300px;
+    color: var(--text-primary);
+
+    p {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+  }
+
+  .no-posts {
+    text-align: center;
+    padding: 48px 0;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+  }
+
+  .blog-posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+    padding: 16px 0;
+  }
+
+  .blog-post-item {
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .blog-posts-container {
+    padding: 16px 12px;
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 24px;
+    }
+
+    .blog-posts-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
+}

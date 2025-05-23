@@ -1,0 +1,59 @@
+@use 'neu' as *;
+
+.blog-post-card {
+  @include neu-surface();
+  margin-bottom: 24px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 12px;
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-4px);
+    @include neu-surface($inset: false);
+  }
+
+  .mat-mdc-card-header {
+    padding: 16px 16px 8px;
+  }
+
+  .mat-mdc-card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--text-primary);
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .mat-mdc-card-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+  }
+
+  .post-body {
+    color: var(--text-primary);
+    line-height: 1.6;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .mat-mdc-card-content {
+    padding: 0 16px 16px;
+  }
+
+  .mat-mdc-card-actions {
+    padding: 8px 16px 16px;
+    margin: 0;
+
+    .mat-mdc-button {
+      @include neu-button();
+    }
+  }
+}

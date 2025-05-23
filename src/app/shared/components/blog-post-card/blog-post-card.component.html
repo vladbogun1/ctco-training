@@ -1,0 +1,12 @@
+<mat-card class="blog-post-card">
+  <mat-card-header>
+    <mat-card-title>{{ post?.title }}</mat-card-title>
+    <mat-card-subtitle>Post ID: {{ post?.id }} • User: {{ post?.userId }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p class="post-body">{{ post?.body }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button color="primary">READ MORE</button>
+  </mat-card-actions>
+</mat-card>

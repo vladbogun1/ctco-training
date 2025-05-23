@@ -18,3 +18,40 @@ $neu-shadow-light:  rgba(255, 255, 255, 0.8);
       -6px -6px 12px $neu-shadow-light;
   }
 }
+
+@mixin neu-button($inset: false) {
+  @include neu-surface($inset);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+
+  padding: .65rem 1.5rem;
+  font: 600 1rem/1 "Inter", sans-serif;
+  color: #444;
+  text-decoration: none;
+  user-select: none;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+
+  transition:
+    box-shadow .15s ease,
+    transform   .15s ease,
+    color       .15s ease;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+  }
+
+  &:active:not(:disabled) {
+    @include neu-surface(true);
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: .4;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
