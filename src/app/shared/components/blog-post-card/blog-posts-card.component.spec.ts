@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BlogPostCardComponent } from "./blog-post-card.component";
 import { PostDto } from "../../../core/models/post.model";
+import {ActivatedRoute} from "@angular/router";
+import {of} from "rxjs";
 
 describe('BlogPostCardComponent', () => {
   let component: BlogPostCardComponent;
@@ -14,7 +16,15 @@ describe('BlogPostCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BlogPostCardComponent]
+      imports: [BlogPostCardComponent],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            params: of({})
+          }
+        }
+      ]
     })
     .compileComponents();
 
