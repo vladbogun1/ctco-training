@@ -1,25 +1,23 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {PostDto} from "../../models/post.model";
-import {Observable, tap} from "rxjs";
+import { Injectable } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { PostDto } from "../../models/post.model";
+import { Observable, tap } from "rxjs";
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  readonly baseUrl = 'api';
+  readonly baseUrl = environment.apiUrl;
 
   constructor(
-    readonly http: HttpClient,
-  ) {
-  }
+    private readonly http: HttpClient,
+  ) {}
 
   getAllPosts(): Observable<PostDto[]> {
-    return this.http.get<PostDto[]>(`${this.baseUrl}/posts`)
-      .pipe(
-        tap(() => console.log('Fetched posts'))
-      )
+    const url = `${this.baseUrl}/posts`;
+    return this.http.get<PostDto[]>(url).pipe(
+      tap(() => console.log('Fetched posts from:', url))
+    );
   }
-
-
 }
