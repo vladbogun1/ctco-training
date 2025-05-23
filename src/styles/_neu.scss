@@ -1,0 +1,20 @@
+/* Styles for neomorphism design */
+$neu-bg:            #d3daff;
+$neu-radius:        16px;
+$neu-shadow-dark:   rgba(0, 0, 0, 0.12);
+$neu-shadow-light:  rgba(255, 255, 255, 0.8);
+
+@mixin neu-surface($inset: false) {
+  background: $neu-bg;
+  border-radius: $neu-radius;
+
+  @if $inset {
+    box-shadow:
+      inset 6px 6px 12px $neu-shadow-dark,
+      inset -6px -6px 12px $neu-shadow-light;
+  } @else {
+    box-shadow:
+      6px 6px 12px $neu-shadow-dark,
+      -6px -6px 12px $neu-shadow-light;
+  }
+}

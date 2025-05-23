@@ -1,6 +1,22 @@
+@use "neu" as *;
+
 .ctco-footer {
-  justify-content: center;
-  padding-inline: 16px;
-  background-color: #d3daff;
-  color: black;
+  @include neu-surface();
+  padding-inline: 24px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+a[mat-icon-button] {
+  @include neu-surface();
+  width: 40px; height: 40px;
+  margin-left: 12px;
+
+  mat-icon { font-size: 20px; }
+
+  &:hover {
+    @include neu-surface($inset: true);
+  }
 }
