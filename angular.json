@@ -54,7 +54,9 @@
                   "maximumError": "4kb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "baseHref": "/ctco-training/",
+              "deployUrl": "/ctco-training/"
             },
             "development": {
               "optimization": false,
