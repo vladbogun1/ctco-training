@@ -26,10 +26,16 @@ jobs:
           name: dist
           path: dist
 
+      - name: List downloaded files
+        run: |
+          ls -la dist/
+          echo "---"
+          ls -la dist/* || true
+
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: dist/ctco-training
+          folder: dist/$(ls -1 dist/ | head -1)
           branch: gh-pages
           clean: true
           target-folder: .
