@@ -3,11 +3,12 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { provideHttpClient } from '@angular/common/http';
 import { ApiService } from './api.service';
 import { PostDto } from '../../models/post.model';
+import {environment} from "../../../../environments/environment";
 
 describe('ApiService', () => {
   let service: ApiService;
   let httpMock: HttpTestingController;
-  const baseUrl = 'api';
+  const baseUrl = environment.apiUrl;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -48,7 +49,6 @@ describe('ApiService', () => {
       expect(req.request.method).toBe('GET');
       req.flush(mockPosts);
 
-      // Clean up subscription
       subscription.unsubscribe();
     });
   });
