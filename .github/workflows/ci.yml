@@ -33,7 +33,7 @@ jobs:
       run: npm test -- --watch=false --browsers=ChromeHeadless
 
     - name: Build
-      run: npm run build -- --configuration=production
+      run: npm run build -- --configuration=production --base-href=/ctco-training/
 
     - name: Upload production build artifact
       if: success()
