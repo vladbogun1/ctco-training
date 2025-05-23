@@ -4,7 +4,6 @@ on:
   workflow_run:
     workflows: ["CI"]
     types: [completed]
-    branches: [main, master, bogun-main, bogun-dev]
   workflow_dispatch:
     inputs:
       ref:
@@ -14,25 +13,16 @@ on:
 
 jobs:
   deploy:
-    if: >
-      (github.event.workflow_run.conclusion == 'success' && 
-       (github.event.workflow_run.head_branch == 'main' || 
-        github.event.workflow_run.head_branch == 'master' ||
-        github.event.workflow_run.head_branch == 'bogun-main' ||
-        github.event.workflow_run.head_branch == 'bogun-dev')) ||
-      (github.event_name == 'workflow_dispatch' && 
-       (github.event.inputs.ref == 'main' || 
-        github.event.inputs.ref == 'master' ||
-        github.event.inputs.ref == 'bogun-main' ||
-        github.event.inputs.ref == 'bogun-dev'))
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
           name: dist
-          path: dist/
+          path: dist
+          run-id: ${{ github.event.workflow_run.id }}
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
