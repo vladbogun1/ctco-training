@@ -8,7 +8,7 @@ import { environment } from '../../../../environments/environment';
   providedIn: 'root'
 })
 export class ApiService {
-  readonly baseUrl = environment.apiUrl;
+  private readonly baseUrl = environment.apiUrl;
 
   constructor(
     private readonly http: HttpClient,
@@ -16,6 +16,7 @@ export class ApiService {
 
   getAllPosts(): Observable<PostDto[]> {
     const url = `${this.baseUrl}/posts`;
+    console.log('Fetching posts from:', url);
     return this.http.get<PostDto[]>(url).pipe(
       tap(() => console.log('Fetched posts from:', url))
     );
