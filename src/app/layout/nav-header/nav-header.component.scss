@@ -3,9 +3,6 @@
 /* header */
 .ctco-header {
   @include neu-surface();
-  position: sticky;
-  top: 0;
-  z-index: 1000;
   padding-inline: 24px;
 
 
