@@ -1,8 +1,8 @@
 
 import {Component, OnInit} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {NavHeaderComponent} from "./nav-header/nav-header.component";
-import {NavFooterComponent} from "./nav-footer/nav-footer.component";
+import {NavHeaderComponent} from "./layout/nav-header/nav-header.component";
+import {NavFooterComponent} from "./layout/nav-footer/nav-footer.component";
 import {IconService} from "./core/services/icon-service/icon.service";
 
 @Component({
