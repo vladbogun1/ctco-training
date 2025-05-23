@@ -26,16 +26,17 @@ jobs:
           name: dist
           path: dist
 
-      - name: List downloaded files
+      - name: Set deployment directory
+        id: set-deploy-dir
         run: |
-          ls -la dist/
-          echo "---"
-          ls -la dist/* || true
+          DEPLOY_DIR=$(ls -d dist/angular-template)
+          echo "Deploying from directory: $DEPLOY_DIR"
+          echo "deploy_dir=$DEPLOY_DIR" >> $GITHUB_ENV
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: dist/$(ls -1 dist/ | head -1)
+          folder: ${{ env.deploy_dir }}
           branch: gh-pages
           clean: true
           target-folder: .
