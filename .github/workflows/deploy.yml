@@ -22,7 +22,6 @@ jobs:
         with:
           name: dist
           path: dist
-          run-id: ${{ github.event.workflow_run.id }}
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
