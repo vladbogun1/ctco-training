@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ActivatedRoute, provideRouter } from '@angular/router';
 import { NavHeaderComponent } from './nav-header.component';
+import { provideLocationMocks } from '@angular/common/testing';
 
 describe('NavHeaderComponent', () => {
   let component: NavHeaderComponent;
@@ -8,7 +9,18 @@ describe('NavHeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NavHeaderComponent]
+      imports: [NavHeaderComponent],
+      providers: [
+        provideRouter([]),
+        provideLocationMocks(),
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: { data: {} },
+            params: { subscribe: (fn: (value: Record<string, string>) => void) => fn({}) }
+          }
+        }
+      ]
     })
     .compileComponents();
 
