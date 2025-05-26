@@ -35,6 +35,10 @@ jobs:
     - name: Build
       run: npm run build -- --configuration=production --base-href=/ctco-training/
 
+    - name: Add 404.html for GitHub Pages
+      run: |
+        cp dist/angular-template/browser/index.html dist/angular-template/browser/404.html
+
     - name: Upload production build artifact
       if: success()
       uses: actions/upload-artifact@v4

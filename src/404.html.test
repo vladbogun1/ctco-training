@@ -1,0 +1,26 @@
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head>-->
+<!--    <meta charset="utf-8">-->
+<!--    <title>Redirecting...</title>-->
+<!--    <script>-->
+<!--        (function() {-->
+<!--            const basePath = '/ctco-training';-->
+<!--            const path = window.location.pathname;-->
+<!--            const search = window.location.search;-->
+
+<!--            if (search) {-->
+<!--                window.location.href = path;-->
+<!--            } else if (path === basePath || path === basePath + '/') {-->
+<!--                window.location.href = basePath + '/index.html';-->
+<!--            } else if (!path.startsWith(basePath + '/')) {-->
+<!--                window.location.href = basePath + '/';-->
+<!--            }-->
+<!--        })();-->
+<!--    </script>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <h1>Page Not Found</h1>-->
+<!--    <p>If you are not redirected automatically, <a href="/ctco-training/">click here to go to the home page</a>.</p>-->
+<!--</body>-->
+<!--</html>-->
