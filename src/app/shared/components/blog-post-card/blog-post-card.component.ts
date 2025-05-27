@@ -4,6 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import {PostDto} from "../../../core/models/post.model";
 import {RouterLink} from "@angular/router";
+import {AppRoutes} from "../../../app-routes";
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -15,4 +16,5 @@ import {RouterLink} from "@angular/router";
 })
 export class BlogPostCardComponent {
   @Input() post!: PostDto;
+  protected readonly AppRoutes = AppRoutes;
 }

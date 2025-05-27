@@ -3,6 +3,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButton} from "@angular/material/button";
 import {RouterLink, RouterLinkActive} from "@angular/router";
+import {AppRoutes} from "../../app-routes";
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -19,4 +20,5 @@ import {RouterLink, RouterLinkActive} from "@angular/router";
 })
 export class NavHeaderComponent {
 
+  protected readonly AppRoutes = AppRoutes;
 }

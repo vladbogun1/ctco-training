@@ -1,6 +1,6 @@
 <mat-toolbar color="primary" class="ctco-header">
   <!-- logo on the left -->
-  <a routerLink="/" class="logo-link" aria-label="Home">
+  <a [routerLink]="AppRoutes.Home" class="logo-link" aria-label="Home">
     <img src="assets/icons/logo.svg" alt="App logo" class="logo"/>
   </a>
 
@@ -8,6 +8,6 @@
   <span class="spacer"></span>
 
   <!-- navigation -->
-  <button mat-button routerLink="/home" routerLinkActive="active">Home</button>
-  <button mat-button routerLink="/posts" routerLinkActive="active">Blog</button>
+  <button mat-button [routerLink]="AppRoutes.Home" routerLinkActive="active">Home</button>
+  <button mat-button [routerLink]="AppRoutes.BlogPosts" routerLinkActive="active">Blog</button>
 </mat-toolbar>

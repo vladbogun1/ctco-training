@@ -1,7 +1,7 @@
 @use 'neu' as *;
 
 .blog-post-card {
-  @include neu-surface();
+  @include neu-framed-block();
   margin-bottom: 24px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border-radius: 12px;
@@ -9,7 +9,7 @@
 
   &:hover {
     transform: translateY(-4px);
-    @include neu-surface($inset: false);
+    @include neu-framed-block($inset: false);
   }
 
   .mat-mdc-card-header {
@@ -54,6 +54,7 @@
 
     .mat-mdc-button {
       @include neu-button();
+      border-radius: 10px !important;
     }
   }
 }

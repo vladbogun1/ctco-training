@@ -2,7 +2,7 @@
 $neu-bg:            #d3daff;
 $neu-radius:        16px;
 $neu-shadow-dark:   rgba(0, 0, 0, 0.12);
-$neu-shadow-light:  rgba(255, 255, 255, 0.8);
+$neu-shadow-light:  rgba(255, 255, 255, 0.6);
 
 @mixin neu-surface($inset: false) {
   background: $neu-bg;
@@ -53,5 +53,31 @@ $neu-shadow-light:  rgba(255, 255, 255, 0.8);
     opacity: .4;
     cursor: not-allowed;
     pointer-events: none;
+  }
+}
+
+@mixin neu-framed-block($inset: false) {
+  @include neu-surface($inset);
+  position: relative;
+
+  // to all children
+  & * {
+    position: relative;
+    z-index: 2;
+  }
+
+  &:after {
+    content: '';
+    // radius = neu-radius - margin
+    border-radius: calc(#{$neu-radius} - 1%);
+    height: -webkit-fill-available;
+    width: -webkit-fill-available;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #dfe4ff;
+    margin: 1%;
+    z-index: 0;
+    box-shadow: inset 1px 1px 1px rgba(174, 174, 192, 0.15), inset -1px -1px 1px rgba(255, 255, 255, 0.7);
   }
 }
