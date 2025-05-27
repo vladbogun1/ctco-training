@@ -46,8 +46,10 @@
 
 .post-card {
   @include neu-framed-block();
-  margin-bottom: 32px;
-  overflow: hidden;
+  & {
+    margin-bottom: 32px;
+    overflow: hidden;
+  }
 
   .mat-mdc-card-header { padding: 24px 24px 16px; }
   .mat-mdc-card-content { padding: 16px 24px 24px; }
@@ -80,7 +82,7 @@
 /* Comments */
 .comments-section {
   margin-top: 32px;
-  
+
   .comments-header {
     display: flex;
     align-items: center;
@@ -90,7 +92,7 @@
     margin: 0 0 24px;
     mat-icon { color: #3f51b5; }
   }
-  
+
   .no-comments {
     @include neu-surface();
     padding: 24px;
@@ -102,10 +104,12 @@
 
 .comment-card {
   @include neu-framed-block();
-  padding: 20px;
-  margin-bottom: 16px;
-  border-radius: $neu-radius;
-  transition: all 0.2s ease;
+  & {
+    padding: 20px;
+    margin-bottom: 16px;
+    border-radius: $neu-radius;
+    transition: all 0.2s ease;
+  }
 
   &:hover {
     transform: translateY(-2px);
