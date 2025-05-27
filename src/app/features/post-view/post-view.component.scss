@@ -45,7 +45,7 @@
 .post-content { animation: fadeIn 0.3s ease; }
 
 .post-card {
-  @include neu-framed-block();
+  @include neu-surface();
   & {
     margin-bottom: 32px;
     overflow: hidden;
@@ -132,6 +132,8 @@
   }
 
   .comment-meta {
+    display: flex;
+    flex-direction: column;
     .comment-author { font: 600 0.95rem sans-serif; color: #333; }
     .comment-email { font-size: 0.8rem; color: #666; margin-top: 2px; }
   }
