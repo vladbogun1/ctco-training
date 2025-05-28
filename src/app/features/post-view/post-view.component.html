@@ -39,6 +39,19 @@
 
       <mat-card-content>
         <p class="post-body">{{ post.body }}</p>
+        
+        <!-- Star Rating -->
+        <div class="rating-container">
+          <h3>Rate this post:</h3>
+          <ctco-star-rating
+            [rating]="ratingStats.userRating || 0"
+            [ratingStats]="ratingStats"
+            [showAverage]="true"
+            [readonly]="false"
+            size="small"
+            (ratingChange)="onRate($event)"
+          ></ctco-star-rating>
+        </div>
       </mat-card-content>
     </mat-card>
 

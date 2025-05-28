@@ -1,0 +1,21 @@
+<div class="star-rating" [class.readonly]="readonly" [ngClass]="size">
+  <button
+    *ngFor="let star of stars"
+    type="button"
+    mat-icon-button
+    [color]="color"
+    [disabled]="readonly"
+    (click)="onClick(star)"
+    (mouseenter)="onHover(star)"
+    (mouseleave)="onMouseLeave()"
+    [matTooltip]="readonly ? '' : 'Rate ' + star + ' stars'"
+    [attr.aria-label]="'Rate ' + star + ' stars'"
+    [attr.aria-pressed]="star === currentRating"
+  >
+    <mat-icon>{{ getStarIcon(star) }}</mat-icon>
+  </button>
+
+  <span *ngIf="showAverage && ratingStats.count > 0" class="rating-text">
+    {{ ratingStats.average | number:'1.0-1' }} ({{ ratingStats.count }})
+  </span>
+</div>

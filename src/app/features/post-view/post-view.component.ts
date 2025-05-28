@@ -1,16 +1,19 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ApiService } from "../../core/services/api-service/api.service";
-import { Subscription, switchMap, catchError, of, finalize } from "rxjs";
-import { ActivatedRoute, RouterLink } from "@angular/router";
-import { PostDto } from "../../core/models/post.model";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ApiService} from "../../core/services/api-service/api.service";
+import {Subscription, switchMap, catchError, of, finalize} from "rxjs";
+import {ActivatedRoute, RouterLink} from "@angular/router";
+import {PostDto} from "../../core/models/post.model";
 import {CommonModule, NgOptimizedImage} from '@angular/common';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatIconModule } from '@angular/material/icon';
-import { GravatarPipe } from '../../core/pipes/gravatar.pipe';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatIconModule} from '@angular/material/icon';
+import {GravatarPipe} from '../../core/pipes/gravatar.pipe';
 import {AppRoutes} from "../../app-routes";
+import {StarRatingComponent} from '../../shared/components/star-rating/star-rating.component';
+import {RatingStats} from '../../core/models/rating.model';
+import {RatingService} from '../../core/services/rating/rating.service';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -25,7 +28,8 @@ import {AppRoutes} from "../../app-routes";
     MatIconModule,
     RouterLink,
     GravatarPipe,
-    NgOptimizedImage
+    NgOptimizedImage,
+    StarRatingComponent
   ],
   templateUrl: './post-view.component.html',
   styleUrl: './post-view.component.scss'
@@ -35,11 +39,15 @@ export class PostViewComponent implements OnInit, OnDestroy {
   protected post: PostDto | null = null;
   protected isLoading = true;
   protected error: string | null = null;
+  protected ratingStats: RatingStats = {average: 0, count: 0, userRating: undefined};
+  protected readonly AppRoutes = AppRoutes;
 
   constructor(
     private readonly apiService: ApiService,
-    private readonly route: ActivatedRoute
-  ) {}
+    private readonly route: ActivatedRoute,
+    private readonly ratingService: RatingService
+  ) {
+  }
 
   ngOnInit(): void {
     this.getParamAndFetchPost();
@@ -48,6 +56,19 @@ export class PostViewComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.post$) {
       this.post$.unsubscribe();
+    }
+  }
+
+  onRate(rating: number): void {
+    if (this.post) {
+      this.ratingService.ratePost(this.post.id, rating);
+      this.ratingStats = this.ratingService.getPostRatings(this.post.id);
+    }
+  }
+
+  private updateRatingStats(id?: number): void {
+    if (id) {
+      this.ratingStats = this.ratingService.getPostRatings(id);
     }
   }
 
@@ -61,6 +82,7 @@ export class PostViewComponent implements OnInit, OnDestroy {
         if (isNaN(postId)) {
           throw new Error('Invalid post ID');
         }
+        this.updateRatingStats(postId);
         return this.apiService.getFullPostById(postId);
       }),
       catchError(error => {
@@ -84,6 +106,4 @@ export class PostViewComponent implements OnInit, OnDestroy {
       }
     });
   }
-
-  protected readonly AppRoutes = AppRoutes;
 }

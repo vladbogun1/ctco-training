@@ -72,11 +72,24 @@
 }
 
 .post-body {
-  margin: 0;
+  margin: 0 0 24px 0;
   color: #444;
   font-size: 1.1rem;
   line-height: 1.7;
   white-space: pre-line;
+}
+
+.rating-container {
+  margin: 24px 0 0;
+  padding: 16px 0 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+
+  h3 {
+    margin: 0 0 12px 0;
+    font-size: 1.1rem;
+    color: #444;
+    font-weight: 500;
+  }
 }
 
 /* Comments */
