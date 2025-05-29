@@ -1,0 +1,202 @@
+@use 'neu' as *;
+
+.guest-book-detail {
+  @include neu-surface();
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+  border-radius: $neu-radius;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+
+  .dialog-header {
+    @include neu-surface(raised);
+    border-radius: $neu-radius 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 24px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+
+    h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #444;
+      letter-spacing: -0.5px;
+    }
+
+    .close-button {
+      @include neu-button(icon);
+      display: inline-block;
+      padding: 0;
+      margin: -8px -8px -8px auto;
+      color: #666;
+      transition: all 0.2s ease;
+
+      &:hover {
+        @include neu-surface(inset);
+        transform: scale(1.1);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+  }
+
+  .dialog-content {
+    padding: 15px 24px !important;
+    flex: 1;
+    overflow-y: auto;
+    background: $neu-bg;
+
+    .entry-header {
+      display: flex;
+      gap: 24px;
+      position: relative;
+      padding-bottom: 24px;
+
+      .author-avatar {
+        @include neu-surface(inset);
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        overflow: hidden;
+        flex-shrink: 0;
+        border: 3px solid rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+
+        &:hover {
+          transform: translateY(-2px);
+        }
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .author-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .author-name {
+          margin: 0 0 8px;
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: #444;
+        }
+
+        .author-email {
+          @include neu-button();
+          width: fit-content;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          margin: 0 0 12px;
+          padding: 6px 12px;
+          color: #3f51b5;
+          text-decoration: none;
+          font-size: 0.95rem;
+          border-radius: 20px;
+
+          &:hover {
+            @include neu-surface(inset);
+          }
+
+          mat-icon {
+            font-size: 18px;
+            width: 18px;
+            height: 18px;
+          }
+        }
+
+        .entry-date {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 0.9rem;
+          color: #666;
+          padding: 4px 12px;
+          border-radius: 15px;
+
+          mat-icon {
+            font-size: 16px;
+            width: 16px;
+            height: 16px;
+          }
+        }
+      }
+    }
+
+    .entry-content {
+      .message-title {
+        margin: 0 0 16px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #444;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .message {
+        @include neu-surface(inset);
+        margin: 0;
+        padding: 20px;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        color: #666;
+        white-space: pre-line;
+        border-radius: 12px;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .guest-book-detail {
+    max-height: 100vh;
+    border-radius: 0;
+    border: none;
+
+    .dialog-content {
+      padding: 20px 16px;
+
+      .entry-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding-bottom: 20px;
+
+        &::after {
+          bottom: 0;
+          left: 16px;
+          right: 16px;
+        }
+
+        .author-avatar {
+          width: 120px;
+          height: 120px;
+          margin-bottom: 20px;
+        }
+
+        .author-info {
+          align-items: center;
+          text-align: center;
+          width: 100%;
+
+          .author-email {
+            justify-content: center;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+<!-- Error State -->
+<div *ngIf="error" class="error-state">
+  <mat-icon color="warn">error_outline</mat-icon>
+  <p>{{ error }}</p>
+  <button mat-raised-button color="primary" (click)="loadEntries()" class="retry-button">
+    <mat-icon>refresh</mat-icon>
+    <span>Retry</span>
+  </button>
+</div>
+
+<!-- Guest Book List -->
+<ctco-guest-book-list
+  *ngIf="!error"
+  [entries]="entries"
+  [selectedEntryId]="selectedEntryId"
+  [isLoading]="isLoading"
+  (addNewEntry)="onAddEntry()"
+  (viewEntry)="onViewEntry($event)"
+></ctco-guest-book-list>

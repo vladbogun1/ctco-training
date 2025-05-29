@@ -1,0 +1,32 @@
+<div class="guest-book-detail">
+  <div class="dialog-header" mat-dialog-title>
+    <h2>Guest Book Entry</h2>
+    <button mat-icon-button mat-dialog-close class="close-button" (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <mat-dialog-content class="dialog-content">
+    <div class="entry-header">
+      <div class="author-avatar">
+        <img [src]="entry.authorEmail | gravatar" [alt]="entry.authorName">
+      </div>
+      <div class="author-info">
+        <h3 class="author-name">{{ entry.authorName }}</h3>
+        <a [href]="'mailto:' + entry.authorEmail" class="author-email">
+          <mat-icon>email</mat-icon>
+          {{ entry.authorEmail }}
+        </a>
+        <div class="entry-date">
+          <mat-icon>schedule</mat-icon>
+          <span>{{ entry.createdAt | date:'mediumDate' }} at {{ entry.createdAt | date:'shortTime' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry-content">
+      <h4 class="message-title">Message</h4>
+      <p class="message">{{ entry.message }}</p>
+    </div>
+  </mat-dialog-content>
+</div>

@@ -1,0 +1,23 @@
+@use 'neu' as *;
+
+.form-view-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px 16px;
+
+  .back-button {
+    margin-bottom: 24px;
+    @include neu-button();
+
+    mat-icon {
+      margin-right: 8px;
+    }
+  }
+
+  h1 {
+    margin-top: 0;
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 32px;
+  }
+}

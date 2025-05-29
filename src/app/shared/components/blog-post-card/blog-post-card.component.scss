@@ -13,7 +13,7 @@
 
   &:hover {
     transform: translateY(-4px);
-    @include neu-framed-block($inset: false);
+    @include neu-framed-block($inset: true);
   }
 
   .mat-mdc-card-header {

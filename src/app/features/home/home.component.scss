@@ -56,7 +56,7 @@
 
       &:hover {
         transform: translateY(-5px);
-        @include neu-surface($inset: false);
+        @include neu-surface($inset: true);
       }
 
       .feature-icon {
