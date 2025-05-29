@@ -1,0 +1,83 @@
+<div class="post-view-container">
+  <!-- Back button -->
+  <div class="back-button">
+    <a mat-button color="primary" routerLink="/{{AppRoutes.BlogPosts}}">
+      <mat-icon>arrow_back</mat-icon>
+      Back to Posts
+    </a>
+  </div>
+
+  <!-- Loading state -->
+  <div *ngIf="isLoading" class="loading-container">
+    <mat-spinner diameter="40"></mat-spinner>
+    <p>Loading post...</p>
+  </div>
+
+  <!-- Error state -->
+  <div *ngIf="error && !isLoading" class="error-container">
+    <mat-icon class="error-icon">error_outline</mat-icon>
+    <p class="error-message">{{ error }}</p>
+    <button mat-raised-button color="primary" (click)="getParamAndFetchPost()">
+      <mat-icon>refresh</mat-icon>
+      Retry
+    </button>
+  </div>
+
+  <!-- Post content -->
+  <div *ngIf="post && !isLoading && !error" class="post-content">
+    <mat-card class="post-card">
+      <mat-card-header>
+        <mat-card-title class="post-title">{{ post.title }}</mat-card-title>
+        <mat-card-subtitle class="post-meta">
+          <span>Post #{{ post.id }}</span>
+          <span class="divider">•</span>
+          <span>By User #{{ post.userId }}</span>
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-divider></mat-divider>
+
+      <mat-card-content>
+        <p class="post-body">{{ post.body }}</p>
+        
+        <!-- Star Rating -->
+        <div class="rating-container">
+          <h3>Rate this post:</h3>
+          <ctco-star-rating
+            [rating]="ratingStats.userRating || 0"
+            [ratingStats]="ratingStats"
+            [showAverage]="true"
+            [readonly]="false"
+            size="small"
+            (ratingChange)="onRate($event)"
+          ></ctco-star-rating>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Comments section -->
+    <div class="comments-section">
+      <h3 class="comments-header">
+        <mat-icon>comment</mat-icon>
+        Comments ({{ post.comments?.length || 0 }})
+      </h3>
+
+      <div *ngIf="!post.comments?.length" class="no-comments">
+        <p>No comments yet. Be the first to comment!</p>
+      </div>
+
+      <div *ngFor="let comment of post.comments" class="comment-card">
+        <div class="comment-header">
+          <div class="comment-avatar">
+            <img [ngSrc]="comment.email | gravatar" [alt]="comment.name" width="40" height="40">
+          </div>
+          <div class="comment-meta">
+            <span class="comment-author">{{ comment.name }}</span>
+            <span class="comment-email">{{ comment.email }}</span>
+          </div>
+        </div>
+        <p class="comment-body">{{ comment.body }}</p>
+      </div>
+    </div>
+  </div>
+</div>

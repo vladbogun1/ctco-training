@@ -1,0 +1,60 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="guest-book-form">
+  <mat-form-field appearance="outline">
+    <mat-label>Your Name</mat-label>
+    <input matInput formControlName="authorName" placeholder="Enter your name" required>
+    <mat-icon matSuffix>person</mat-icon>
+    <mat-error *ngIf="form.get('authorName')?.hasError('required')">
+      Name is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input matInput type="email" formControlName="authorEmail" placeholder="Enter your email" required>
+    <mat-icon matSuffix>email</mat-icon>
+    <mat-error *ngIf="form.get('authorEmail')?.hasError('required')">
+      Email is required
+    </mat-error>
+    <mat-error *ngIf="form.get('authorEmail')?.hasError('email')">
+      Please enter a valid email
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Your Message</mat-label>
+    <textarea
+      matInput
+      formControlName="message"
+      placeholder="Write your message here (minimum 20 characters)"
+      required
+      rows="5"
+    ></textarea>
+    <mat-error *ngIf="form.get('message')?.hasError('required')">
+      Message is required
+    </mat-error>
+    <mat-error *ngIf="form.get('message')?.hasError('minlength')">
+      Message must be at least 20 characters long
+    </mat-error>
+  </mat-form-field>
+
+  <div class="form-actions">
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="form.invalid || isSubmitting"
+    >
+      <mat-icon>send</mat-icon>
+      {{ isSubmitting ? 'Submitting...' : 'Submit' }}
+    </button>
+
+    <button
+      mat-button
+      type="button"
+      (click)="onCancel.emit()"
+      [disabled]="isSubmitting"
+    >
+      Cancel
+    </button>
+  </div>
+</form>

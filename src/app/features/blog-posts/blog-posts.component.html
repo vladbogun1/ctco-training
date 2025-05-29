@@ -1,0 +1,39 @@
+<div class="blog-posts-container">
+  <h1>Latest Blog Posts</h1>
+
+  <!-- Filters -->
+  <ctco-posts-filters (filterChanged)="onFilterChange()" class="filters-container"></ctco-posts-filters>
+
+  <!-- Content Area -->
+  @if (isLoading$ | async) {
+    <!-- Loading State -->
+    <div class="loading-container">
+      <mat-spinner diameter="50"></mat-spinner>
+      <p>Loading posts...</p>
+    </div>
+  } @else if (error$ | async; ) {
+    <!-- Error State -->
+    <div class="error-container">
+      <mat-icon class="error-icon">error_outline</mat-icon>
+      <h2>Something went wrong</h2>
+      <p class="error-message">{{ error$ | async }}</p>
+      <button mat-raised-button color="primary" (click)="onFilterChange()">
+        <mat-icon>refresh</mat-icon>
+        Try Again
+      </button>
+    </div>
+  } @else {
+    <!-- Posts Grid -->
+    <div class="blog-posts-grid">
+      @for (post of posts$ | async; track post.id) {
+        <ctco-blog-post-card
+          [post]="post"
+          class="blog-post-item"
+        ></ctco-blog-post-card>
+      }
+      @if (!((posts$ | async)?.length)) {
+        <p class="no-posts-message">No posts found</p>
+      }
+    </div>
+  }
+</div>

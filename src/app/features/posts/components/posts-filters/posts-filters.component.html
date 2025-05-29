@@ -1,0 +1,57 @@
+<div class="filters-container">
+  <form [formGroup]="filterForm" class="filters-form">
+    <!-- Search -->
+    <mat-form-field appearance="outline" class="search-field" subscriptSizing="dynamic">
+      <mat-label>Search posts</mat-label>
+      <input matInput formControlName="searchTerm" placeholder="Search by title or content...">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+
+    <!-- User Filter -->
+    <mat-form-field appearance="outline" class="user-filter" subscriptSizing="dynamic">
+      <mat-label>Filter by User</mat-label>
+      <mat-select formControlName="userId">
+        <mat-option [value]="null">All Users</mat-option>
+        <mat-option *ngFor="let userId of uniqueUserIds" [value]="userId">
+          User {{ userId }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Sort Controls -->
+    <div class="sort-controls">
+      <mat-form-field appearance="outline" class="sort-field" subscriptSizing="dynamic">
+        <mat-label>Sort By</mat-label>
+        <mat-select formControlName="sortKey">
+          <mat-option [value]="null">None</mat-option>
+          <mat-option *ngFor="let option of sortOptions" [value]="option.value">
+            {{ option.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button
+        type="button"
+        mat-icon-button
+        class="sort-direction"
+        [disabled]="!filterForm.get('sortKey')?.value"
+        (click)="filterForm.patchValue({ sortDirection: filterForm.get('sortDirection')?.value === 'asc' ? 'desc' : 'asc' })"
+      >
+        <mat-icon>{{ filterForm.get('sortDirection')?.value === 'asc' ? 'arrow_upward' : 'arrow_downward' }}</mat-icon>
+      </button>
+    </div>
+
+    <!-- Reset Button -->
+    <button
+      type="button"
+      mat-stroked-button
+      color="warn"
+      class="reset-button"
+      (click)="resetFilters()"
+      [disabled]="!filterForm.dirty"
+    >
+      <mat-icon>refresh</mat-icon>
+      Reset Filters
+    </button>
+  </form>
+</div>

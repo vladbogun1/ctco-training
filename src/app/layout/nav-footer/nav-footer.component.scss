@@ -1,0 +1,29 @@
+@use 'neu' as *;
+
+.ctco-footer {
+  @include neu-surface();
+  padding-inline: 24px;
+
+  .copyright {
+    display: inline-block;
+    color: #999;
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
+  }
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+a[mat-icon-button] {
+  @include neu-surface();
+  width: 40px; height: 40px;
+  margin-left: 12px;
+
+  mat-icon { font-size: 20px; }
+
+  &:hover {
+    @include neu-surface($inset: true);
+  }
+}

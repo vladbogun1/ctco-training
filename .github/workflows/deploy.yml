@@ -1,0 +1,48 @@
+name: Deploy to GitHub Pages
+
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Ref to deploy (branch or tag)'
+        required: false
+        default: 'main'
+
+jobs:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Download build artifact
+        uses: dawidd6/action-download-artifact@v3
+        with:
+          github_token: ${{ github.token }}
+          workflow: ci.yml
+          workflow_conclusion: success
+          name: dist
+          path: dist
+
+      - name: Set deployment directory
+        id: set-deploy-dir
+        run: |
+          DEPLOY_DIR=$(ls -d dist/angular-template)
+          echo "Deploying from directory: $DEPLOY_DIR"
+          echo "deploy_dir=$DEPLOY_DIR" >> $GITHUB_ENV
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: ${{ env.deploy_dir }}/browser
+          branch: gh-pages
+          clean: true
+          target-folder: .

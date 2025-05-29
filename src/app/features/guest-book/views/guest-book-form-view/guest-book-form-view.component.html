@@ -1,0 +1,13 @@
+<div class="form-view-container">
+  <button mat-button (click)="onCancel()" class="back-button">
+    <mat-icon>arrow_back</mat-icon>
+    Back to Guest Book
+  </button>
+
+  <h1>New Guest Book Entry</h1>
+
+  <ctco-guest-book-form
+    (submitForm)="onSubmit($event)"
+    (onCancel)="onCancel()"
+  ></ctco-guest-book-form>
+</div>

@@ -1,0 +1,23 @@
+<mat-toolbar color="primary" class="ctco-header">
+  <!-- logo on the left -->
+  <a [routerLink]="AppRoutes.Home" class="logo-link" aria-label="Home">
+    <img src="assets/icons/logo.svg" alt="App logo" class="logo"/>
+  </a>
+
+  <!-- pushes buttons to the right -->
+  <span class="spacer"></span>
+
+  <!-- navigation -->
+  <button mat-button [routerLink]="AppRoutes.Home" routerLinkActive="active">
+    <mat-icon>home</mat-icon>
+    <span>Home</span>
+  </button>
+  <button mat-button [routerLink]="AppRoutes.BlogPosts" routerLinkActive="active">
+    <mat-icon>article</mat-icon>
+    <span>Blog</span>
+  </button>
+  <button mat-button [routerLink]="AppRoutes.GuestBook" routerLinkActive="active">
+    <mat-icon>menu_book</mat-icon>
+    <span>Guest Book</span>
+  </button>
+</mat-toolbar>

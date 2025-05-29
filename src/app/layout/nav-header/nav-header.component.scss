@@ -1,0 +1,113 @@
+@use 'neu' as *;
+
+/* header */
+.ctco-header {
+  @include neu-surface();
+  padding: 0.5rem 1rem;
+  height: auto;
+  min-height: 64px;
+  position: relative;
+  z-index: 2;
+
+  /* logo */
+  .logo-link {
+    display: flex;
+    align-items: center;
+
+    .logo {
+      height: 40px;
+      width: auto;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  /* nav buttons */
+  button[mat-button] {
+    @include neu-surface();
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 0.25rem 0.5rem;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    min-width: 100px;
+
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+    }
+
+    span {
+      font-size: 0.9rem;
+    }
+
+    &:hover,
+    &.cdk-program-focused,
+    &.active {
+      @include neu-surface($inset: true);
+      color: var(--primary-color);
+      
+      mat-icon {
+        color: var(--primary-color);
+      }
+    }
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .ctco-header {
+    padding: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .logo-link .logo {
+      height: 36px;
+    }
+
+    .spacer {
+      display: none;
+    }
+
+    nav {
+      width: 100%;
+      order: 1;
+      padding: 0.5rem 0;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    button[mat-button] {
+      margin: 0.25rem;
+      padding: 0.5rem;
+      font-size: 0.9rem;
+      flex: 1;
+      text-align: center;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .ctco-header {
+    .logo-link .logo {
+      height: 32px;
+    }
+
+    button[mat-button] {
+      padding: 0.25rem;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}

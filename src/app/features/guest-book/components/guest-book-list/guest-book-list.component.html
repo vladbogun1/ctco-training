@@ -1,0 +1,62 @@
+<div class="guest-book-container">
+  <div class="guest-book-header">
+    <h2>Guest Book</h2>
+    <button mat-raised-button color="primary" (click)="onAddNewEntry($event)" class="add-entry-button">
+      <mat-icon>add</mat-icon>
+      <span>Add New Entry</span>
+    </button>
+  </div>
+
+  <div class="entries-container">
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="loading-state">
+      <div class="loading-spinner">
+        <mat-spinner diameter="48" strokeWidth="4"></mat-spinner>
+      </div>
+      <p>Loading guest book entries...</p>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="!isLoading && (!entries || entries.length === 0)" class="no-entries">
+      <mat-icon>info</mat-icon>
+      <p>No entries yet. Be the first to sign our guest book!</p>
+      <button mat-raised-button color="primary" (click)="onAddNewEntry($event)" class="add-first-entry" aria-label="Add first guest book entry">
+        <mat-icon>add</mat-icon>
+        <span>Add First Entry</span>
+      </button>
+    </div>
+
+    <mat-card *ngFor="let entry of entries" class="guest-book-entry" [class.selected]="selectedEntryId === entry.id">
+      <mat-card-header>
+        <div mat-card-avatar class="guest-avatar">
+          <img [src]="entry.authorEmail | gravatar:80" [alt]="entry.authorName" (error)="onImageError($event)">
+        </div>
+        <div class="header-content">
+          <mat-card-title class="author-name">{{ entry.authorName }}</mat-card-title>
+          <mat-card-subtitle class="entry-date">
+            <mat-icon>schedule</mat-icon>
+            {{ entry.createdAt | date:'mediumDate' }}
+          </mat-card-subtitle>
+        </div>
+        <div class="entry-actions">
+          <button mat-icon-button (click)="onViewEntry(entry.id, $event)" matTooltip="View Details">
+            <mat-icon>visibility</mat-icon>
+          </button>
+        </div>
+      </mat-card-header>
+
+      <mat-divider></mat-divider>
+
+      <mat-card-content>
+        <p class="message">{{ entry.message }}</p>
+      </mat-card-content>
+
+      <mat-card-actions align="end">
+        <button mat-button color="primary" (click)="onViewEntry(entry.id, $event)">
+          <mat-icon>chat_bubble_outline</mat-icon>
+          <span>View Full Entry</span>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
